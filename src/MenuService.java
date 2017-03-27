@@ -107,32 +107,35 @@ public class MenuService {
                 System.out.println(animal.getAnimals().get(i-1));
                 while(true){
                     System.out.println("What is the new name: ");
-                    if(scan.nextLine().isEmpty()){
+                    String input =scan.nextLine();
+                    if(input.isEmpty()){
                         System.out.println("Error input a name");
                     }else {
-                        animal.getAnimals().set(i-1, scan.nextLine());
+                        animal.getAnimals().set(i-1, input);
                         break;
                     }
                 }
                 try{
                     while(true){
                         System.out.println("What is the new species: ");
-                        if(scan.nextLine().isEmpty()){
+                        String input =scan.nextLine();
+                        if(input.isEmpty()){
                             System.out.println("Error input species");
                         }
                         else{
-                            animal.addSpecies(scan.nextLine());
+                            animal.addSpecies(input);
                             break;
                         }
                     }
                     while(true){
                         System.out.println("What is the new breed(optional): ");
-                        if(scan.nextLine().isEmpty()){
+                        String input =scan.nextLine();
+                        if(input.isEmpty()){
                             animal.addBreed(null);
                             break;
                         }
                         else{
-                            animal.addBreed(scan.nextLine());
+                            animal.addBreed(input);
                             break;
                         }
                     }
