@@ -1,6 +1,3 @@
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
-import com.sun.xml.internal.stream.Entity;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
@@ -155,9 +152,15 @@ public class MenuService {
                 if (selection == i) {
                     System.out.println(animalList.remove(i - 1) + " has been removed");
                 }
+                if(animalList.size() == 0){
+                    System.out.println("Shelter is empty");
+                }
             }
-        } catch (Exception e){
-            System.out.println("That ID is empty");
+            if(selection > animalList.size() || selection < 0) {
+                System.out.println("Please choose a valid range");
+            }
+            } catch (Exception e){
+            System.out.println(e);
         }
         return animal;
     }

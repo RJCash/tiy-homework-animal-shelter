@@ -25,8 +25,6 @@ public class Animal {
         if (selection.equals("Peggy")) {
             this.species = "Horse";
             this.Breed = "Donkey";
-        }else{
-           return this.species;
         }
         return this.species;
     }
