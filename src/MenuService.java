@@ -34,7 +34,6 @@ public class MenuService {
             return scan.nextInt();
         }
     }
-
     public Animal CreateAnAnimal(Animal animal) {
         scan = new Scanner(System.in);
         System.out.println(" -- Create an Animal -- ");
@@ -42,30 +41,32 @@ public class MenuService {
         try {
             while (true) {
                 System.out.println("What is the animal name: ");
-                if (scan.nextLine().isEmpty()) {
+                String input = scan.nextLine();
+                if (input.isEmpty()) {
                     System.out.print("Error: please enter a animal name\n");
                 } else {
-                    animal.addAnimal(scan.nextLine());
+                    animal.addAnimal(input);
                     break;
                 }
             }
             while (true) {
-                    System.out.print("What is the species: \n");
-                    if (scan.nextLine().isEmpty()) {
-                        System.out.print("Error: please enter a species\n");
-                    } else {
-                        animal.addSpecies(scan.nextLine());
-                        break;
-                    }
+                System.out.print("What is the species: \n");
+                String input = scan.nextLine();
+                if (input.isEmpty()) {
+                    System.out.print("Error: please enter a species\n");
+                } else {
+                    animal.addSpecies(input);
+                    break;
                 }
+            }
             while (true) {
                 System.out.println("What is the breed (optional): ");
-                if (scan.nextLine().isEmpty()) {
+                String input= scan.nextLine();
+                if (input.isEmpty()) {
                     animal.addBreed(null);
                     break;
                 } else {
-                    String BreedName = scan.nextLine();
-                    animal.addBreed(BreedName);
+                    animal.addBreed(input);
                     break;
                 }
             }
@@ -91,7 +92,7 @@ public class MenuService {
                     }
                 }
             }
-            } catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("\nInvalid data");
         }
         return animal;
@@ -104,15 +105,15 @@ public class MenuService {
             if (selection == i) {
                 System.out.println("The animal you chose is: ");
                 System.out.println(animal.getAnimals().get(i-1));
-                    while(true){
-                        System.out.println("What is the new name: ");
-                        if(scan.nextLine().isEmpty()){
-                            System.out.println("Error input a name");
-                        }else {
-                            animal.getAnimals().set(i-1, scan.nextLine());
-                            break;
-                        }
+                while(true){
+                    System.out.println("What is the new name: ");
+                    if(scan.nextLine().isEmpty()){
+                        System.out.println("Error input a name");
+                    }else {
+                        animal.getAnimals().set(i-1, scan.nextLine());
+                        break;
                     }
+                }
                 try{
                     while(true){
                         System.out.println("What is the new species: ");
@@ -153,13 +154,9 @@ public class MenuService {
                 }
             }
         } catch (Exception e){
-                System.out.println("That ID is empty");
-            }
+            System.out.println("That ID is empty");
+        }
         return animal;
     }
 
 }
-
-
-
-
