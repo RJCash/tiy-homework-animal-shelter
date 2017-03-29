@@ -42,7 +42,6 @@ public class MenuService {
         }
     }
     public Animal CreateAnAnimal(Animal animal) {
-        scan = new Scanner(System.in);
         System.out.println(" -- Create an Animal -- ");
         System.out.println();
         try {
@@ -82,7 +81,26 @@ public class MenuService {
         }
         return animal;
     }
-
+    public Animal viewAnimalDetails(Animal animal) {
+        ArrayList<String> animalList = animal.getAnimals();
+        System.out.println("What is the numeric ID of the animal you want to view?: ");
+        try {
+            if (scan.hasNextInt()) {
+                selection = scan.nextInt();
+                for (int i = 1; i <= animalList.size(); i++) {
+                    if (selection == i) {
+                        System.out.println("Animal name is: " + animalList.get(i - 1));
+                        System.out.println("Animal species is: "
+                                + animal.getSpecies());
+                        System.out.println("Animal breed is: " + animal.getBreed());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("\nInvalid data");
+        }
+        return animal;
+    }
 
 
 
