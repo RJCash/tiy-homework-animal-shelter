@@ -19,7 +19,6 @@ public class MenuServiceTest {
         PrintStream printStream = new PrintStream(outputStream);
         System.setOut(printStream);
     }
-
     @Test
     public void whenSelectionIs1Display() {
         String x = "1";
@@ -37,7 +36,6 @@ public class MenuServiceTest {
         menu.getMenuAndSelection();
         assertThat(this.outputStream.toString(), containsString("2) "));
     }
-
     @Test
     public void errorDisplay() {
         Scanner scanner = new Scanner("bad\n5");
@@ -68,7 +66,15 @@ public class MenuServiceTest {
         int selection = menu.getMenuAndSelection();
         assertThat(selection, equalTo(3));
     }
-
+    @Test
+    public void nothingToStart(){
+        Animal animal = new Animal();
+        Scanner scanner = new Scanner("1");
+        MenuService menu = new MenuService(scanner);
+        menu.getMenuAndSelection();
+        System.out.println(animal.getAnimals());
+        assertThat(outputStream.toString(), containsString("[]"));
+    }
     @Test
     public void addAnimalListWorks() {
         Animal animals = new Animal();
@@ -76,13 +82,6 @@ public class MenuServiceTest {
         System.out.println(animals.getAnimals());
         assertThat(outputStream.toString(), containsString("bear"));
     }
-    @Test
-    public void viewDetails() throws Exception {
-        Animal animals = new Animal();
-        Scanner scan = new Scanner("2\nbearname\nbear\nfluffy\n3\n1");
-        MenuService menu = new MenuService(scan);
-        int input = menu.getMenuAndSelection();
-        assertThat(outputStream.toString(), containsString("bear"));
-    }
+
 }
 

@@ -46,7 +46,7 @@ public class MenuService {
         System.out.println();
         try {
             while (true) {
-                System.out.println("What is the animal name: ");
+                System.out.print("What is the animal name: ");
                 String input = scan.nextLine();
                 if (input.isEmpty()) {
                     System.out.print("Error: please enter a animal name\n");
@@ -103,6 +103,21 @@ public class MenuService {
     }
 
 
-
-
+    public Animal deleteAnimal(Animal animal) {
+        ArrayList<String> animalList = animal.getAnimals();
+        selection = waitForInt("What is the numeric ID of the animal you want to delete?: ");
+        for (int i = 0; i <= animalList.size(); i++) {
+                if(animalList.size() == 0){
+                    System.out.println("Shelter is empty");
+                }else
+                if(selection > animalList.size() || selection < 0) {
+                    System.out.println("Please choose a valid range");
+                }else
+                if (selection == i) {
+                    System.out.println(animalList.remove(i - 1) + " has been removed");
+                }
+                }
+        return animal;
+    }
 }
+

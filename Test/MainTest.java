@@ -46,5 +46,14 @@ public class MainTest {
         assertThat(outputStream.toString(), containsString("species"));
         assertThat(outputStream.toString(), containsString("grizzly"));
     }
+    @Test
+    public void deleteAnimal(){
+        Animal animal= new Animal();
+        Scanner scan = new Scanner("bear\nspecies\ngrizzly\n1");
+        MenuService menu = new MenuService(scan);
+        menu.CreateAnAnimal(animal);
+        menu.deleteAnimal(animal);
+        assertThat(outputStream.toString(), containsString("bear has been removed"));
+    }
 }
 
