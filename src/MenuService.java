@@ -24,11 +24,21 @@ public class MenuService {
     public int waitForInt(String message) {
         System.out.println(message);
         if (!scan.hasNextInt()) {
-            String badMessage = scan.nextLine();
+             String badMessage = scan.nextLine();
             System.out.println(badMessage + " is not a valid selection");
             return waitForInt(message);
         } else {
             return scan.nextInt();
+        }
+    }
+    public String waitForString(String input, boolean status){
+        System.out.println(input);
+        input = scan.next();
+        if(status == true && input.isEmpty()){
+            System.out.println("This field requires input");
+            return waitForString(input, status);
+        }else{
+            return input;
         }
     }
     public Animal CreateAnAnimal(Animal animal) {

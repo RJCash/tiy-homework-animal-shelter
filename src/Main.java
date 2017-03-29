@@ -16,11 +16,11 @@ public class Main {
             }else if(selection == 2){
                 menu.CreateAnAnimal(animal);
             }else if(selection == 3){
-                menu.viewAnimalDetails(animal);
+
             }else if(selection == 4){
-                menu.editAnimal(animal);
+
             }else if(selection == 5){
-                menu.deleteAnimal(animal);
+
             }else if(selection == 6){
                break;
             }

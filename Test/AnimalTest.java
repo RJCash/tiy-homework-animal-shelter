@@ -18,5 +18,6 @@ public class AnimalTest {
         }
         assertThat(true, equalTo(hasAnimal));
     }
+
 }
 

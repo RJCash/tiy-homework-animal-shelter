@@ -34,12 +34,12 @@ public class MenuServiceTest {
         menu.getMenuAndSelection();
         assertThat(this.outputStream.toString(), containsString("2) "));
     }
-    public void errorDisplay {
-        String x = "1";
-        Scanner scanner = new Scanner(x);
+    @Test
+    public void errorDisplay(){
+        Scanner scanner = new Scanner("bad\n5");
         MenuService menu = new MenuService(scanner);
-        menu.getMenuAndSelection();
-        assertThat(this.outputStream.toString(), containsString("-- Main Menu --"));
+        int input = menu.getMenuAndSelection();
+        assertThat(outputStream.toString(), containsString("bad is not a valid selection"));
     }
     @Test
     public void when1inputThenis1(){
@@ -62,7 +62,15 @@ public class MenuServiceTest {
         int selection = menu.getMenuAndSelection();
         assertThat(selection, equalTo(3));
     }
-
+    @Test
+    public void addAnimalWorks(){
+        Scanner scanner = new Scanner("");
+        MenuService menu = new MenuService(scanner);
+        Animal animals = new Animal();
+        animals.addAnimal("bear");
+        System.out.println(animals.getAnimals());
+        assertThat(outputStream.toString(), containsString("bear"));
+    }
 }
 
 
