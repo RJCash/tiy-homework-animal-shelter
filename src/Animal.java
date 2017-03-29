@@ -9,24 +9,7 @@ public class Animal {
 
     public Animal(){
         animalList = new ArrayList<>();
-        animalList.add("Stuffin");
-        animalList.add("Pickles");
-        animalList.add("Peggy");
-    }
-    public String setDefaultSpecies(String selection) throws Exception {
-        if (selection.equals("Stuffin")) {
-            this.species = "Bear";
-            this.Breed = "Grizzly";
-        }else
-        if (selection.equals("Pickles")) {
-            this.species = "Tiger";
-            this.Breed = "White Tiger";
-        }else
-        if (selection.equals("Peggy")) {
-            this.species = "Horse";
-            this.Breed = "Donkey";
-        }
-        return this.species;
+
     }
     public ArrayList<String> getAnimals() {
         return this.animalList;
