@@ -28,32 +28,7 @@ public class MainTest {
         Main main = new Main();
         assertThat(Integer.parseInt(input), equalTo(menu.getMenuAndSelection()));
     }
-        @Test
-    public void addBreedWorks(){
-        Animal animal = new Animal();
-        animal.addBreed("labrador");
-        System.out.println(animal.getBreed());
-        assertThat(animal.getBreed(), containsString("labrador"));
-    }
-    @Test
-    public void editAnimal(){
-        Animal animal= new Animal();
-        Scanner scan = new Scanner("bear\nspecies\ngrizzly\n1");
-        MenuService menu = new MenuService(scan);
-        menu.CreateAnAnimal(animal);
-        menu.viewAnimalDetails(animal);
-        assertThat(outputStream.toString(), containsString("bear"));
-        assertThat(outputStream.toString(), containsString("species"));
-        assertThat(outputStream.toString(), containsString("grizzly"));
-    }
-    @Test
-    public void deleteAnimal(){
-        Animal animal= new Animal();
-        Scanner scan = new Scanner("bear\nspecies\ngrizzly\n1");
-        MenuService menu = new MenuService(scan);
-        menu.CreateAnAnimal(animal);
-        menu.deleteAnimal(animal);
-        assertThat(outputStream.toString(), containsString("bear has been removed"));
-    }
+
+
 }
 

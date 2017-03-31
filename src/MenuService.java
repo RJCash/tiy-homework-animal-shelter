@@ -24,7 +24,7 @@ public class MenuService {
     public int waitForInt(String message) {
         System.out.println(message);
         if (!scan.hasNextInt()) {
-             String badMessage = scan.nextLine();
+            String badMessage = scan.nextLine();
             System.out.println(badMessage + " is not a valid selection");
             return waitForInt(message);
         } else {
@@ -116,7 +116,7 @@ public class MenuService {
                 if (selection == i) {
                     System.out.println(animalList.remove(i - 1) + " has been removed");
                 }
-                }
+        }
         return animal;
     }
 }

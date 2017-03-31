@@ -18,7 +18,6 @@ public class Main {
             }else if(selection == 3){
                 menu.viewAnimalDetails(animal);
             }else if(selection == 4){
-
             }else if(selection == 5){
                 menu.deleteAnimal(animal);
             }else if(selection == 6){
