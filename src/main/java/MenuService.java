@@ -61,7 +61,7 @@ public class MenuService {
                 if (input.isEmpty()) {
                     System.out.print("Error: please enter a species\n");
                 } else {
-                    animal.addSpecies(input);
+                    animal.setSpecies(input);
                     break;
                 }
             }
@@ -69,10 +69,10 @@ public class MenuService {
                 System.out.println("What is the breed (optional): ");
                 String input= scan.nextLine();
                 if (input.isEmpty()) {
-                    animal.addBreed(null);
+                    animal.setBreed(null);
                     break;
                 } else {
-                    animal.addBreed(input);
+                    animal.setBreed(input);
                     break;
                 }
             }
@@ -102,7 +102,6 @@ public class MenuService {
         return animal;
     }
 
-
     public Animal deleteAnimal(Animal animal) {
         ArrayList<String> animalList = animal.getAnimals();
         selection = waitForInt("What is the numeric ID of the animal you want to delete?: ");
@@ -119,5 +118,66 @@ public class MenuService {
         }
         return animal;
     }
-}
+    public Animal editAnimal(Animal animal) {
+        ArrayList<String> animalList = animal.getAnimals();
+        System.out.println();
+        int selection = waitForInt("What is the numeric ID of the animal you want to edit?");
+        for (int i = 1; i <= animalList.size(); i++) {
+            if(animalList.size() == 0){
+                System.out.println("Shelter is empty");
+            }else
+            if(selection > animalList.size() || selection < 0) {
+                System.out.println("Please choose a valid range");
+            }else
+            if (selection == i) {
+                System.out.println("The animal you chose is: ");
+                System.out.println(animalList.get(i-1));
+                while(true){
+                    System.out.println("What is the new name: ");
+                    String input =scan.nextLine();
+                    if(input.isEmpty()){
+                        System.out.println("Error input a name");
+                    }else {
+                        animalList.set(i-1, input);
+                        break;
+                    }
+                }
+                try{
+                    while(true){
+                        System.out.println("What is the new species: ");
+                        String input =scan.nextLine();
+                        if(input.isEmpty()){
+                            System.out.println("Error input species");
+                        }
+                        else{
+                            animal.setSpecies(input);
+                            break;
+                        }
+                    }
+                    while(true){
+                        System.out.println("What is the new breed(optional): ");
+                        String input =scan.nextLine();
+                        if(input.isEmpty()){
+                            animal.setBreed(null);
+                            break;
+                        }
+                        else{
+                            animal.setBreed(input);
+                            break;
+                        }
+                    }
+                }catch (Exception e){
+                    System.out.println("Error");
+                }
+            }
+        }
+        return animal;
+    }
+    }
+
+
+
+
+
+
 

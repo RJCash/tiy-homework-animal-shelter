@@ -45,14 +45,14 @@ public class AnimalTest {
     @Test
     public void addSpeciesWork() throws Exception{
         Animal animal = new Animal();
-        animal.addSpecies("someSpecies");
+        animal.setSpecies("someSpecies");
         System.out.println(animal.getSpecies());
         assertThat(animal.getSpecies(), containsString("someSpecies"));
     }
     @Test
     public void addBreedWorks(){
         Animal animal = new Animal();
-        animal.addBreed("labrador");
+        animal.setBreed("labrador");
         System.out.println(animal.getBreed());
         assertThat(animal.getBreed(), containsString("labrador"));
     }

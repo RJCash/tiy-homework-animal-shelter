@@ -9,7 +9,15 @@ public class Animal {
 
     public Animal(){
         animalList = new ArrayList<>();
-
+    }
+    public void setAnimalList(ArrayList<String> animalList) {
+        this.animalList = animalList;
+    }
+    public void setSpecies(String species) {
+        this.species = species;
+    }
+    public void setBreed(String breed) {
+        Breed = breed;
     }
     public ArrayList<String> getAnimals() {
         return this.animalList;
@@ -19,12 +27,6 @@ public class Animal {
     }
     public String getSpecies() {
         return this.species;
-    }
-    public void addSpecies(String speciesName) throws Exception{
-        this.species = speciesName;
-    }
-    public void addBreed(String breedName){
-        this.Breed = breedName;
     }
     public String getBreed(){
         return this.Breed;

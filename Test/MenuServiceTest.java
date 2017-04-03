@@ -106,7 +106,7 @@ public class MenuServiceTest {
         assertThat(outputStream.toString(), containsString("[]"));
     }
     @Test
-    public void editAnimalThroughInput(){
+    public void CreateAnimalThroughInput(){
         Animal animal= new Animal();
         Scanner scan = new Scanner("bear\nspecies\ngrizzly\n1");
         MenuService menu = new MenuService(scan);
@@ -125,8 +125,84 @@ public class MenuServiceTest {
         menu.deleteAnimal(animal);
         assertThat(outputStream.toString(), containsString("bear has been removed"));
     }
-
-
-
+    @Test
+    public void deleteAnimalThroughInputThatIsOutOfRange(){
+        Animal animal= new Animal();
+        Scanner scan = new Scanner("bear\nspecies\ngrizzly\n5\n24");
+        MenuService menu = new MenuService(scan);
+        menu.CreateAnAnimal(animal);
+        menu.deleteAnimal(animal);
+        assertThat(outputStream.toString(), containsString("Please choose a valid range"));
+    }
+    @Test
+    public void deleteAnimalInAEmptyShelter(){
+        Animal animal= new Animal();
+        Scanner scan = new Scanner("5");
+        MenuService menu = new MenuService(scan);
+        menu.deleteAnimal(animal);
+        assertThat(outputStream.toString(), containsString("Shelter is empty"));
+    }
+    @Test
+    public void selectionQuitTest() {
+        String input = "6";
+        Scanner scan = new Scanner(input);
+        MenuService menu = new MenuService(scan);
+        Main main = new Main();
+        assertThat(Integer.parseInt(input), equalTo(menu.getMenuAndSelection()));
+    }
+    @Test
+    public void CheckAnimalName() throws Exception{
+            Animal animal = new Animal();
+            animal.addAnimal("fluffy");
+            Scanner scanner = new Scanner("1");
+            MenuService menu = new MenuService(scanner);
+            System.out.println(animal.getAnimals());
+            assertThat(outputStream.toString(), containsString("fluffy"));
+        }
+        @Test
+        public void promptForViewDetailsID(){
+            Animal animal = new Animal();
+            animal.addAnimal("fluffy");
+            animal.setSpecies("Husky");
+            animal.setBreed("dog");
+            Scanner scanner = new Scanner("1");
+            MenuService menu = new MenuService(scanner);
+            menu.viewAnimalDetails(animal);
+            assertThat(outputStream.toString(), containsString("What is the numeric ID"));
+        }
+        @Test
+        public void viewDetails() throws Exception{
+            Animal animal = new Animal();
+            animal.addAnimal("fluffy");
+            animal.setSpecies("Husky");
+            animal.setBreed("dog");
+            Scanner scanner = new Scanner("1");
+            MenuService menu = new MenuService(scanner);
+            menu.viewAnimalDetails(animal);
+            assertThat(outputStream.toString(), containsString("fluffy"));
+            assertThat(outputStream.toString(), containsString("Husky"));
+            assertThat(outputStream.toString(), containsString("dog"));
+    }
+    @Test
+    public void editAnimalThroughInput(){
+        Animal animal= new Animal();
+        Scanner scan = new Scanner("bear\nspecies\ngrizzly\n1");
+        MenuService menu = new MenuService(scan);
+        menu.editAnimal(animal);
+        menu.viewAnimalDetails(animal);
+        assertThat(outputStream.toString(), containsString("bear"));
+        assertThat(outputStream.toString(), containsString("species"));
+        assertThat(outputStream.toString(), containsString("grizzly"));
+    }
+    @Test
+    public void PromptForEditAnimalID(){
+        Animal animal= new Animal();
+        Scanner scan = new Scanner("4");
+        MenuService menu = new MenuService(scan);
+        menu.editAnimal(animal);
+        assertThat(outputStream.toString(), containsString("What is the " +
+                "numeric ID"));
+    }
 }
+
 
