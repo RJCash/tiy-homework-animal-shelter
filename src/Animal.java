@@ -3,53 +3,52 @@ import java.util.ArrayList;
  * Created by rickiecashwell on 3/20/17.
  */
 public class Animal {
-    private ArrayList<String> animalList;
+
+
+    private String name;
     private String species;
     private String Breed;
+    private String description;
 
-    public Animal(){
-        animalList = new ArrayList<>();
-        animalList.add("Stuffin");
-        animalList.add("Pickles");
-        animalList.add("Peggy");
+
+    public Animal(String name, String species, String breed, String description){
+        this.name = name;
+        this.species = species;
+        this.Breed = breed;
+        this.description = description;
     }
-    public String setDefaultSpecies(String selection) throws Exception {
-        if (selection.equals("Stuffin")) {
-            this.species = "Bear";
-            this.Breed = "Grizzly";
-        }else
-        if (selection.equals("Pickles")) {
-            this.species = "Tiger";
-            this.Breed = "White Tiger";
-        }else
-        if (selection.equals("Peggy")) {
-            this.species = "Horse";
-            this.Breed = "Donkey";
-        }
-        return this.species;
+    public void setSpecies(String species) {
+        this.species = species;
     }
-    public ArrayList<String> getAnimals() {
-        return this.animalList;
+    public void setName(String name) {
+        this.name = name;
     }
-    public void addAnimal(String name){
-        this.animalList.add(name);
+    public void setBreed(String breed) {
+        Breed = breed;
+    }
+    public void setDescription(String description) {
+        this.description = description;
     }
     public String getSpecies() {
-        return this.species;
+        return species;
     }
-    public void addSpecies(String speciesName) throws Exception{
-        this.species = speciesName;
+    public String getBreed() {
+        return Breed;
     }
-    public void addBreed(String breedName){
-        this.Breed = breedName;
+    public String getDescription() {
+        return description;
     }
-    public String getBreed(){
-        return this.Breed;
+    public String getName() {
+        return name;
     }
+
+    @Override
     public String toString() {
         return "Animal{" +
-                "animalList=" + animalList +
+                "name='" + name + '\'' +
                 ", species='" + species + '\'' +
+                ", Breed='" + Breed + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

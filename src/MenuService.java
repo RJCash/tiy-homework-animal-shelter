@@ -31,10 +31,20 @@ public class MenuService {
             return scan.nextInt();
         }
     }
-    public Animal CreateAnAnimal(Animal animal) {
+    public void ListAnimal(ArrayList<Animal> animal){
+        if(animal.size() == 0) {
+            System.out.println("The shelter is empty");
+            }
+            for(int i = 0; i < animal.size(); i++){
+            System.out.println((i+1)+")"+animal.get(i).getName()+"       "+ animal.get(i).getSpecies());
+            }
+
+    }
+    public Animal CreateAnAnimal() {
         scan = new Scanner(System.in);
         System.out.println(" -- Create an Animal -- ");
         System.out.println();
+        Animal animal = new Animal("x","x","x","x");
         try {
             while (true) {
                 System.out.println("What is the animal name: ");
@@ -42,7 +52,7 @@ public class MenuService {
                 if (input.isEmpty()) {
                     System.out.print("Error: please enter a animal name\n");
                 } else {
-                    animal.addAnimal(input);
+                    animal.setName(input);
                     break;
                 }
             }
@@ -52,7 +62,7 @@ public class MenuService {
                 if (input.isEmpty()) {
                     System.out.print("Error: please enter a species\n");
                 } else {
-                    animal.addSpecies(input);
+                    animal.setSpecies(input);
                     break;
                 }
             }
@@ -60,10 +70,21 @@ public class MenuService {
                 System.out.println("What is the breed (optional): ");
                 String input= scan.nextLine();
                 if (input.isEmpty()) {
-                    animal.addBreed(null);
+                    animal.setBreed(null);
                     break;
                 } else {
-                    animal.addBreed(input);
+                    animal.setBreed(input);
+                    break;
+                }
+            }
+            while (true) {
+                System.out.println("What is the description: ");
+                String input= scan.nextLine();
+                if (input.isEmpty()) {
+                    animal.setDescription(null);
+                    break;
+                } else {
+                    animal.setDescription(input);
                     break;
                 }
             }
@@ -73,96 +94,125 @@ public class MenuService {
         return animal;
     }
 
-    public Animal viewAnimalDetails(Animal animal) {
+    public ArrayList<Animal> viewAnimalDetails(ArrayList<Animal> animal) {
         scan = new Scanner(System.in);
-        ArrayList<String> animalList = animal.getAnimals();
-        System.out.println("What is the numeric ID of the animal you want to view?: ");
-        try {
-            if (scan.hasNextInt()) {
-                selection = scan.nextInt();
-                for (int i = 1; i <= animalList.size(); i++) {
-                    if (selection == i) {
-                        System.out.println("Animal name is: " + animalList.get(i - 1));
-                        System.out.println("Animal species is: "
-                                + animal.setDefaultSpecies(animalList.get(i - 1)));
-                        System.out.println("Animal breed is: " + animal.getBreed());
+        if(animal.size() ==  0){
+            System.out.println("The shelter is empty");
+        }else {
+            System.out.println("What is the numeric ID of the animal you want to view?: ");
+            if(selection > animal.size() || selection < 0){
+                System.out.println("Pick a valid range");
+            }else {
+                try {
+                    if (scan.hasNextInt()) {
+                        selection = scan.nextInt();
+                        for (int i = 1; i <= animal.size(); i++) {
+                            if (selection == i) {
+                                System.out.println("Animal name is: " + animal.get(i - 1).getName());
+                                System.out.println("Animal species is: "
+                                        + (animal.get(i - 1).getSpecies()));
+                                System.out.println("Animal breed is: " + animal.get(i - 1).getBreed());
+                                System.out.println("Animal description is: " + animal.get(i - 1).getDescription());
+                            }
+                        }
                     }
+                } catch (Exception e) {
+                    System.out.println("\nInvalid data");
                 }
             }
-        } catch (Exception e) {
-            System.out.println("\nInvalid data");
-        }
+            }
         return animal;
     }
-    public Animal editAnimal(Animal animal) {
+    public ArrayList<Animal> editAnimal(ArrayList<Animal> animal) {
         Scanner scan = new Scanner(System.in);
         System.out.println();
-        int selection = waitForInt("What is the numeric ID of the animal you want to edit?");
-        for (int i = 1; i <= animal.getAnimals().size(); i++) {
-            if (selection == i) {
-                System.out.println("The animal you chose is: ");
-                System.out.println(animal.getAnimals().get(i-1));
-                while(true){
-                    System.out.println("What is the new name: ");
-                    String input =scan.nextLine();
-                    if(input.isEmpty()){
-                        System.out.println("Error input a name");
-                    }else {
-                        animal.getAnimals().set(i-1, input);
-                        break;
+        if(animal.size() ==  0){
+            System.out.println("The shelter is empty");
+        }else {
+            int selection = waitForInt("What is the numeric ID of the animal you want to edit?");
+            if(selection > animal.size() || selection < 0){
+                System.out.println("Pick a valid range");
+            }else {
+                for (int i = 1; i <= animal.size(); i++) {
+                    if (selection == i) {
+                        System.out.println("The animal you chose is: ");
+                        System.out.println(animal.get(i - 1).getName());
+                        while (true) {
+                            System.out.println("What is the new name: ");
+                            String input = scan.nextLine();
+                            if (input.isEmpty()) {
+                                System.out.println("You didn't change name.");
+                                break;
+                            } else {
+                                animal.get(i - 1).setName(input);
+                                break;
+                            }
+                        }
+                        try {
+                            while (true) {
+                                System.out.println("What is the new species: ");
+                                String input = scan.nextLine();
+                                if (input.isEmpty()) {
+                                    System.out.println("You didn't change species.");
+                                    break;
+                                } else {
+                                    animal.get(i - 1).setSpecies(input);
+                                    break;
+                                }
+                            }
+                            while (true) {
+                                System.out.println("What is the new description: ");
+                                String input = scan.nextLine();
+                                if (input.isEmpty()) {
+                                    System.out.println("You didn't change description");
+                                    break;
+                                } else {
+                                    animal.get(i - 1).setDescription(input);
+                                    break;
+                                }
+                            }
+                            while (true) {
+                                System.out.println("What is the new breed(optional): ");
+                                String input = scan.nextLine();
+                                if (input.isEmpty()) {
+                                    animal.get(i - 1).setBreed("N/A");
+                                    System.out.println("You didn't change breed");
+                                    break;
+                                } else {
+                                    animal.get(i - 1).setBreed(input);
+                                    break;
+                                }
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Error");
+                        }
                     }
-                }
-                try{
-                    while(true){
-                        System.out.println("What is the new species: ");
-                        String input =scan.nextLine();
-                        if(input.isEmpty()){
-                            System.out.println("Error input species");
-                        }
-                        else{
-                            animal.addSpecies(input);
-                            break;
-                        }
-                    }
-                    while(true){
-                        System.out.println("What is the new breed(optional): ");
-                        String input =scan.nextLine();
-                        if(input.isEmpty()){
-                            animal.addBreed(null);
-                            break;
-                        }
-                        else{
-                            animal.addBreed(input);
-                            break;
-                        }
-                    }
-                }catch (Exception e){
-                    System.out.println("Error");
+
                 }
             }
-        }
+            }
         return animal;
     }
-    public Animal deleteAnimal(Animal animal) {
+    public ArrayList<Animal> deleteAnimal(ArrayList<Animal> animals) {
         scan = new Scanner(System.in);
-        ArrayList<String> animalList = animal.getAnimals();
-        selection = waitForInt("What is the numeric ID of the animal you want to delete?: ");
+        int selection = waitForInt("What is the numeric ID of the animal you want to delete?: ");
         try {
-            for (int i = 0; i <= animalList.size(); i++) {
+            for (int i = 0; i <= animals.size(); i++) {
                 if (selection == i) {
-                    System.out.println(animalList.remove(i - 1) + " has been removed");
+                    System.out.println( animals.get(i-1).getName()+ " has been removed");
+                    animals.remove(i - 1);
                 }
-                if(animalList.size() == 0){
+                if(animals.size() == 0){
                     System.out.println("Shelter is empty");
                 }
             }
-            if(selection > animalList.size() || selection < 0) {
+            if(selection > animals.size() || selection < 0) {
                 System.out.println("Please choose a valid range");
             }
             } catch (Exception e){
             System.out.println(e);
         }
-        return animal;
+        return animals;
     }
 
 }
