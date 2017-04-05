@@ -111,7 +111,11 @@ public class MenuService {
                                 System.out.println("Animal name is: " + animal.get(i - 1).getName());
                                 System.out.println("Animal species is: "
                                         + (animal.get(i - 1).getSpecies()));
-                                System.out.println("Animal breed is: " + animal.get(i - 1).getBreed());
+                                if(animal.get(i-1).getBreed()==null) {
+                                    System.out.println("Animal breed is: " + "N/A");
+                                }else{
+                                    System.out.println("Animal breed is: " + animal.get(i - 1).getBreed());
+                                }
                                 System.out.println("Animal description is: " + animal.get(i - 1).getDescription());
                             }
                         }
