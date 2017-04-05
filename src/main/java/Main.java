@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -7,13 +8,13 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
         MenuService menu = new MenuService(scan);
-        Animal animal = new Animal();
+        ArrayList<Animal> animal = new ArrayList<>();
         while(true){
             int selection = menu.getMenuAndSelection();
             if(selection == 1){
-                System.out.println(animal.getAnimals());
+                menu.ListAnimal(animal);
             }else if(selection == 2){
-                menu.CreateAnAnimal(animal);
+                animal.add(menu.CreateAnAnimal());
             }else if(selection == 3){
                 menu.viewAnimalDetails(animal);
             }else if(selection == 4){
@@ -21,12 +22,9 @@ public class Main {
             }else if(selection == 5){
                 menu.deleteAnimal(animal);
             }else if(selection == 6){
-               System.exit(0);
+                break;
             }
 
         }
-
-
     }
-
 }

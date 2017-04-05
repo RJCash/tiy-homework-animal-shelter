@@ -3,38 +3,48 @@ import java.util.ArrayList;
  * Created by rickiecashwell on 3/20/17.
  */
 public class Animal {
-    private ArrayList<String> animalList;
+    private String name;
     private String species;
     private String Breed;
+    private String description;
 
-    public Animal(){
-        animalList = new ArrayList<>();
-    }
-    public void setAnimalList(ArrayList<String> animalList) {
-        this.animalList = animalList;
+    public Animal(String name, String species, String breed, String description){
+        this.name = name;
+        this.species = species;
+        this.Breed = breed;
+        this.description = description;
     }
     public void setSpecies(String species) {
         this.species = species;
     }
+    public void setName(String name) {
+        this.name = name;
+    }
     public void setBreed(String breed) {
         Breed = breed;
     }
-    public ArrayList<String> getAnimals() {
-        return this.animalList;
-    }
-    public void addAnimal(String name){
-        this.animalList.add(name);
+    public void setDescription(String description) {
+        this.description = description;
     }
     public String getSpecies() {
-        return this.species;
+        return species;
     }
-    public String getBreed(){
-        return this.Breed;
+    public String getBreed() {
+        return Breed;
     }
+    public String getDescription() {
+        return description;
+    }
+    public String getName() {
+        return name;
+    }
+    @Override
     public String toString() {
         return "Animal{" +
-                "animalList=" + animalList +
+                "name='" + name + '\'' +
                 ", species='" + species + '\'' +
+                ", Breed='" + Breed + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

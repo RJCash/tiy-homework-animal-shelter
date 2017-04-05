@@ -21,21 +21,20 @@ import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 public class MainTest {
     private ByteArrayOutputStream outputStream;
             @Rule
-            public final TextFromStandardInputStream systemInMock
-                    = emptyStandardInputStream();
+            public final TextFromStandardInputStream systemInMock = emptyStandardInputStream();
             public final ExpectedSystemExit exit = ExpectedSystemExit.none();
             public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
             @Test
             public void testMockInput() {
                 Main main = new Main();
-                systemInMock.provideText("5");
+                systemInMock.provideLines("5");
                 Scanner scan = new Scanner(System.in);
                 assertThat("5", equalTo(scan.nextLine()));
             }
             @Test
             public void containStringMockTest(){
                 Main main = new Main();
-                systemInMock.provideText("1\n");
+                systemInMock.provideText("1");
                 Scanner scan = new Scanner(System.in);
                 assertThat("1", containsString(scan.nextLine()));
             }
@@ -47,14 +46,12 @@ public class MainTest {
             public void exits () {
                 Main main = new Main();
             systemInMock.provideText("6");
-            Scanner scan = new Scanner(System.in);
-            exit.expectSystemExit();
+                exit.expectSystemExit();
         }
         @Test
         public void exitsWithStatusCode1 () {
             Main main = new Main();
             systemInMock.provideText("6");
-            Scanner scan = new Scanner(System.in);
             exit.expectSystemExitWithStatus(1);
         }
     }

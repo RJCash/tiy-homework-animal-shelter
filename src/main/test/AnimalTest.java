@@ -25,18 +25,20 @@ public class AnimalTest {
     public void doesAnimalInstantiate(){
         Scanner scan = new Scanner(System.in);
         Animal animal;
-        if((animal = new Animal()) == null){
+        if((animal = new Animal("Donkey Kong","monkey","ape","likes bananas")) == null){
             fail();
         }
         assertThat("passed", equalTo("passed"));
     }
     @Test
-    public void doesAddAnimalWork(){
-        Animal animal = new Animal();
-        animal.addAnimal("Monkey");
+    public void doesSetAnimalNameWork(){
+        Animal animal = new Animal("fluffy","Husky","dog", "doggy");
+        ArrayList<Animal> animals = new ArrayList<>();
+        animal.setName("Bob");
+        animals.add(animal);
         boolean hasAnimal = false;
-        for(int i = 1; i <= animal.getAnimals().size(); i++){
-            if(animal.getAnimals().get(i-1) == "Monkey"){
+        for(int i = 1; i <= animals.size(); i++){
+            if(animals.get(i-1).getName() == "Bob"){
                 hasAnimal = true;
             }
         }
@@ -44,30 +46,45 @@ public class AnimalTest {
     }
     @Test
     public void addSpeciesWork() throws Exception{
-        Animal animal = new Animal();
+        Animal animal = new Animal("fluffy","Husky","dog", "doggy");
+        ArrayList<Animal> animals = new ArrayList<>();
         animal.setSpecies("someSpecies");
-        System.out.println(animal.getSpecies());
-        assertThat(animal.getSpecies(), containsString("someSpecies"));
+        animals.add(animal);
+        boolean hasAnimal = false;
+        for(int i = 1; i <= animals.size(); i++){
+            if(animals.get(i-1).getSpecies() == "someSpecies"){
+                hasAnimal = true;
+            }
+        }
+        assertThat(true, equalTo(hasAnimal));
     }
     @Test
     public void addBreedWorks(){
-        Animal animal = new Animal();
+        Animal animal = new Animal("fluffy","Husky","dog", "doggy");
+        ArrayList<Animal> animals = new ArrayList<>();
         animal.setBreed("labrador");
-        System.out.println(animal.getBreed());
-        assertThat(animal.getBreed(), containsString("labrador"));
+        animals.add(animal);
+        boolean hasAnimal = false;
+        for(int i = 0; i < animals.size(); i++){
+            if(animals.get(i).getBreed() == "labrador"){
+                hasAnimal = true;
+            }
+        }
+        assertThat(true, equalTo(hasAnimal));
     }
     @Test
     public void deleteAnimalInArrayList(){
-        Animal animal = new Animal();
-        animal.getAnimals().add("gorilla");
-        animal.getAnimals().remove(0);
-        assertThat(0, equalTo(animal.getAnimals().size()));
+        Animal animal = new Animal("fluffy","Husky","dog", "doggy");
+        ArrayList<Animal> animals = new ArrayList<>();
+        animals.add(animal);
+        animals.remove(animal);
+        assertThat(0, equalTo(animals.size()));
     }
     @Test
     public void addAnimalListWorks() {
-        Animal animals = new Animal();
-        animals.addAnimal("bear");
-        System.out.println(animals.getAnimals());
+        Animal animal = new Animal("Fluffy","was", "a", "bear");
+        animal.setName("bear");
+        System.out.println(animal.toString());
         assertThat(outputStream.toString(), containsString("bear"));
     }
 }
