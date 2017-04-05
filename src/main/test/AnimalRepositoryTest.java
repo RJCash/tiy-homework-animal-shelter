@@ -26,17 +26,6 @@ public class AnimalRepositoryTest {
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-    @Before
-    public void before(){
-        try{
-            String url = "jdbc:h2:mem:animals";
-            statement = conn.createStatement();
-            this.conn = DriverManager.getConnection(url);
-            AnimalRepository animalRepository = new AnimalRepository(url);
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
-    }
     @Test
     public void readData() throws SQLException {
         try {
@@ -62,14 +51,17 @@ public class AnimalRepositoryTest {
     }
     @Test
    public void listAnimalTest() throws SQLException{
+        this.conn = DriverManager.getConnection(url);
+        statement = conn.createStatement();
+        AnimalRepository animalRepository = new AnimalRepository(url);
         Animal animal1 = new Animal("Mitch","Human", "CaveMan", "Some Dude I know");
         animalRepository.saveAnimal(animal1);
-        animalRepository.listAnimals(animal1);
-        assertThat(animalRepository.toString(), containsString("Mitch"));
+        assertThat(animalRepository.listAnimals(animal1).toString(), containsString("Mitch"));
     }
-    @After
-    public void x() throws SQLException {
-    Statement statement = conn.createStatement();
-    statement.execute("Shutdown");
-    }
+    //@After
+    //public void x() throws SQLException {
+    //this.conn = DriverManager.getConnection(url);
+    //Statement statement = conn.createStatement();
+    //statement.execute("SIGINT");
+    //}
 }
