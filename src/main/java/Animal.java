@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 /**
  * Created by rickiecashwell on 3/20/17.
  */
@@ -7,12 +6,20 @@ public class Animal {
     private String species;
     private String Breed;
     private String description;
+    private int ID;
 
     public Animal(String name, String species, String breed, String description){
         this.name = name;
         this.species = species;
         this.Breed = breed;
         this.description = description;
+    }
+    public Animal(int id, String name,String species, String breed, String description) {
+        this.name = name;
+        this.species = species;
+        this.Breed = breed;
+        this.description = description;
+        this.ID = id;
     }
     public void setSpecies(String species) {
         this.species = species;

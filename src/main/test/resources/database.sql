@@ -1,8 +1,7 @@
-CREATE TABLE animals (
+CREATE TABLE if not EXISTS animals (
   animal_name CHARACTER VARYING(20) NOT NULL,
   animal_breed CHARACTER VARYING(20) NOT NULL,
   animal_species CHARACTER VARYING(20) NOT NULL,
   animal_description CHARACTER VARYING(20) NOT NULL,
-  animalid INTEGER PRIMARY KEY NOT NULL DEFAULT nextval('animals_animalid_seq'::regclass)
+  animalid INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL
 );
-CREATE UNIQUE INDEX animals_animalid_uindex ON animals USING BTREE (animalid);

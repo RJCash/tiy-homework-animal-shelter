@@ -9,6 +9,10 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         MenuService menu = new MenuService(scan);
         ArrayList<Animal> animal = new ArrayList<>();
+        String jdbcUrl = "jdbc:postgresql://localhost/people";
+        AnimalRepository repository = new AnimalRepository(jdbcUrl);
+
+        //System.out.println(people);
         while(true){
             int selection = menu.getMenuAndSelection();
             if(selection == 1){

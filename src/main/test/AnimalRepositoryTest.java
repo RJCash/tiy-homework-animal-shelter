@@ -1,67 +1,66 @@
-import com.sun.tracing.dtrace.ArgsAttributes;
-import org.junit.After;
+import org.dbunit.IDatabaseTester;
+import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.operation.DatabaseOperation;
+import org.h2.jdbcx.JdbcDataSource;
+import org.h2.tools.RunScript;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.*;
+import java.io.File;
+import java.util.ArrayList;
 
-import java.util.Scanner;
-
-import static junit.framework.TestCase.fail;
+import static org.h2.engine.Constants.UTF8;
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.startsWith;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+import static org.junit.Assert.assertThat;
 /**
  * Created by rickiecashwell on 4/3/17.
  */
 public class AnimalRepositoryTest {
-    private String url = "jdbc:h2:mem:animals;init=runscript FROM 'classpath:./database.sql'";
-    private Connection conn;
-    private Statement statement = null;
-    private PreparedStatement preparedStatement = null;
-    private ResultSet resultSet = null;
-    @Test
-    public void readData() throws SQLException {
-        try {
-            this.conn = DriverManager.getConnection(url);
-            statement = conn.createStatement();
-            AnimalRepository animalRepository = new AnimalRepository(url);
-            Animal animal1 = new Animal("Mitch","Human", "CaveMan", "Some Dude I know");
-            animalRepository.saveAnimal(animal1);
-            ResultSet rs = statement.executeQuery("SELECT * FROM animals");
-            while (rs.next()) {
-                String name = rs.getString(1);
-                String breed = rs.getString(2);
-                String species = rs.getString(3);
-                String description = rs.getString(4);
-                assertThat("Mitch", equalTo(name));
-                assertThat("Human", equalTo(species));
-                assertThat("CaveMan", equalTo(breed));
-                assertThat("Some dude I Know", equalTo(description));
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
+    private static final String JDBC_DRIVER = org.h2.Driver.class.getName();
+    private static final String JDBC_URL = "jdbc:h2:mem:animals;DB_CLOSE_DELAY=-1";
+    private static final String USER = "";
+    private static final String PASSWORD = "";
+    @BeforeClass
+    public static void createSchema() throws Exception {
+        RunScript.execute(JDBC_URL, USER, PASSWORD, "/Users/rickiecashwell/projects/tiy-homework-animal-shelter/src/main/test/resources/database.sql", UTF8, false);
+    }
+    @Before
+    public void importDataSet() throws Exception {
+        IDataSet dataSet = readDataSet();
+        cleanlyInsert(dataSet);
+    }
+    private IDataSet readDataSet() throws Exception {
+        return new FlatXmlDataSetBuilder().build(new File("set1.xml"));
+    }
+    public void cleanlyInsert(IDataSet dataSet) throws Exception {
+        IDatabaseTester databaseTester = new JdbcDatabaseTester(JDBC_DRIVER, JDBC_URL, USER, PASSWORD);
+        databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
+        databaseTester.setDataSet(dataSet);
+        databaseTester.onSetup();
     }
     @Test
-   public void listAnimalTest() throws SQLException{
-        this.conn = DriverManager.getConnection(url);
-        statement = conn.createStatement();
-        AnimalRepository animalRepository = new AnimalRepository(url);
-        Animal animal1 = new Animal("Mitch","Human", "CaveMan", "Some Dude I know");
-        animalRepository.saveAnimal(animal1);
-        assertThat(animalRepository.listAnimals(animal1).toString(), containsString("Mitch"));
+    public void findsAnimalID() throws Exception {
+        AnimalRepository repository = new AnimalRepository(JDBC_URL);
+        String name = repository.readAnimalNameByID(1);
+        assertThat(name, equalTo("Bob"));
     }
-    //@After
-    //public void x() throws SQLException {
-    //this.conn = DriverManager.getConnection(url);
-    //Statement statement = conn.createStatement();
-    //statement.execute("SIGINT");
-    //}
+    @Test
+    public void JdbcDataSource() {
+        JdbcDataSource dataSource = new JdbcDataSource();
+        dataSource.setURL(JDBC_URL);
+        dataSource.setUser(USER);
+        dataSource.setPassword(PASSWORD);
+    }
+    @Test
+    public void ListDatabaseAnimal() throws Exception {
+        //Connection conn = DriverManager.getConnection(JDBC_URL);
+        AnimalRepository repo = new AnimalRepository(JDBC_URL);
+        //Statement stmt = conn.createStatement();
+        ArrayList<Animal> animals = repo.listAnimalsIndatabase();
+       assertThat(animals.get(0).getName(), containsString("Bob"));
+    }
 }
