@@ -21,6 +21,15 @@ public class Animal {
         this.description = description;
         this.ID = id;
     }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
     public void setSpecies(String species) {
         this.species = species;
     }

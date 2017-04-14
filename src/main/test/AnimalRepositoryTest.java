@@ -59,7 +59,6 @@ public class AnimalRepositoryTest {
     public void ListDatabaseAnimal() throws Exception {
         //Connection conn = DriverManager.getConnection(JDBC_URL);
         AnimalRepository repo = new AnimalRepository(JDBC_URL);
-        //Statement stmt = conn.createStatement();
         ArrayList<Animal> animals = repo.listAnimalsIndatabase();
        assertThat(animals.get(0).getName(), containsString("Bob"));
     }

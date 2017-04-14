@@ -5,17 +5,15 @@ import java.util.ArrayList;
  * Created by rickiecashwell on 4/3/17.
  */
 public class AnimalRepository {
-
-
-
     private Connection conn;
 
     public AnimalRepository(String conn) throws SQLException {
         this.conn = DriverManager.getConnection(conn);
     }
-
-    public void deleteAnimal(Animal animal){
-
+    public void deleteAnimal(Animal animal) throws SQLException{
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM animals WHERE animal_name = ?");
+        stmt.setString(1,animal.getName());
+        stmt.execute();
     }
     public void insertAnimal(Animal animal) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement( "INSERT INTO animals (animal_name, animal_breed, animal_species, animal_description) " +
@@ -37,7 +35,16 @@ public class AnimalRepository {
         }
         return name;
     }
-
+    public int readIDbyAnimalName(String name) throws SQLException {
+        Integer id = null;
+        PreparedStatement prepstmt = conn.prepareStatement("SELECT * FROM animals WHERE animal_name = ?");
+        prepstmt.setInt(1,id);
+        ResultSet rs = prepstmt.executeQuery();
+        while(rs.next()){
+            id = rs.getInt("animalid");
+        }
+        return id;
+    }
     public void editanimalinDataBase(int id, Animal animal) throws SQLException {
     PreparedStatement stmt = conn.prepareStatement(
             "UPDATE animals SET animal_name = ?, animal_breed =?,animal_species=?,animal_description=? WHERE animalid=?");
