@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0380cbbd-174e-4937-91e3-7cda121304d8" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/test/tiy-homework-animal-shelter/resources/database.sql" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/test/MainTest.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Animal.java" afterPath="$PROJECT_DIR$/src/main/java/Animal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/AnimalRepository.java" afterPath="$PROJECT_DIR$/src/main/java/AnimalRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Main.java" afterPath="$PROJECT_DIR$/src/main/java/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/MenuService.java" afterPath="$PROJECT_DIR$/src/main/java/MenuService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/test/AnimalRepositoryTest.java" afterPath="$PROJECT_DIR$/src/main/test/AnimalRepositoryTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/test/MenuServiceTest.java" afterPath="$PROJECT_DIR$/src/main/test/MenuServiceTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/test/resources/database.sql" afterPath="$PROJECT_DIR$/src/main/test/resources/database.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tiy-homework-animal-shelter.iml" afterPath="$PROJECT_DIR$/tiy-homework-animal-shelter.iml" />
-    </list>
+    <list default="true" id="0380cbbd-174e-4937-91e3-7cda121304d8" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -96,8 +83,8 @@
       <file leaf-file-name="AnimalRepository.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/AnimalRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1131">
-              <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+            <state relative-caret-position="-31">
+              <caret line="50" column="7" lean-forward="false" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
               <folding>
                 <marker date="1492174764000" expanded="true" signature="403:444" ph="DELETE FROM " />
                 <marker date="1492174764000" expanded="true" signature="645:758" ph="INSERT INTO animals... " />
@@ -270,9 +257,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="3" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="723" />
+    <option name="height" value="674" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -1032,7 +1020,7 @@
       <workItem from="1492008103135" duration="3739000" />
       <workItem from="1492016782986" duration="4130000" />
       <workItem from="1492086534152" duration="9284000" />
-      <workItem from="1492111188820" duration="5949000" />
+      <workItem from="1492111188820" duration="6694000" />
     </task>
     <servers />
   </component>
@@ -1069,10 +1057,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101338000" />
+    <option name="totallyTimeSpent" value="102083000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="723" extended-state="0" />
+    <frame x="3" y="23" width="1280" height="674" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1085,7 +1073,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.52931595" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3553719" sideWeight="0.48371336" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38669065" sideWeight="0.48371336" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1711,8 +1699,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/AnimalRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1131">
-          <caret line="7" column="4" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="4" />
+        <state relative-caret-position="-31">
+          <caret line="50" column="7" lean-forward="false" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
           <folding>
             <marker date="1492174764000" expanded="true" signature="403:444" ph="DELETE FROM " />
             <marker date="1492174764000" expanded="true" signature="645:758" ph="INSERT INTO animals... " />
