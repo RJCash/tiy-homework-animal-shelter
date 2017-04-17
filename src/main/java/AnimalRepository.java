@@ -1,56 +1,77 @@
 import java.sql.*;
 import java.util.ArrayList;
+
 /**
  * Created by rickiecashwell on 4/3/17.
  */
 public class AnimalRepository {
-    ArrayList<Animal> animals = new ArrayList<>();
-    public ArrayList<Animal> getAnimals() {
-        return animals;
-    }
     private Connection conn;
-    public AnimalRepository(String conn) throws SQLException{
+
+    public AnimalRepository(String conn) throws SQLException {
         this.conn = DriverManager.getConnection(conn);
     }
-    public void saveAnimal(Animal animal) throws SQLException {
-        Statement stmt = conn.createStatement();
-        stmt.execute("INSERT INTO animals (animal_name, animal_breed, animal_species,animal_description) " +
-                "VALUES ('animal.getName() + animal.getBreed() + animal.getSpecies() + animal.getDescription()'");
+    public void deleteAnimal(Animal animal) throws SQLException{
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM animals WHERE animal_name = ?");
+        stmt.setString(1,animal.getName());
+        stmt.execute();
     }
-    public int readAnimalByID(Animal animal) throws SQLException{
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT animal_id FROM animals");
-            int id=0;
-            String name;
-            while(rs.next()){
-               id = rs.getInt(1);
-            }
+    public void insertAnimal(Animal animal) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement( "INSERT INTO animals (animal_name, animal_breed, animal_species, animal_description) " +
+                "VALUES (?,?,?,?)");
+                stmt.setString(1, animal.getName());
+                stmt.setString(2, animal.getBreed());
+                stmt.setString(3, animal.getSpecies());
+                stmt.setString(4, animal.getDescription());
+                stmt.execute();
+    }
+
+    public String readAnimalNameByID(int id) throws SQLException {
+        String name = null;
+        PreparedStatement prepstmt = conn.prepareStatement("SELECT * FROM animals WHERE animalid = ?");
+        prepstmt.setInt(1,id);
+        ResultSet rs = prepstmt.executeQuery();
+        while(rs.next()){
+        name = rs.getString("animal_name");
+        }
+        return name;
+    }
+    public int readIDbyAnimalName(String name) throws SQLException {
+        Integer id = null;
+        PreparedStatement prepstmt = conn.prepareStatement("SELECT * FROM animals WHERE animal_name = ?");
+        prepstmt.setInt(1,id);
+        ResultSet rs = prepstmt.executeQuery();
+        while(rs.next()){
+            id = rs.getInt("animalid");
+        }
         return id;
     }
-    public void editanimalinDataBase(Animal animal) throws SQLException{
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM animals");
+    public void editanimalinDataBase(int id, Animal animal) throws SQLException {
+    PreparedStatement stmt = conn.prepareStatement(
+            "UPDATE animals SET animal_name = ?, animal_breed =?,animal_species=?,animal_description=? WHERE animalid=?");
+            stmt.setString(1, animal.getName());
+            stmt.setString(2, animal.getBreed());
+            stmt.setString(3, animal.getSpecies());
+            stmt.setString(4, animal.getDescription());
+            stmt.setInt(5, id);
+            stmt.execute();
 
     }
-    public ArrayList listAnimals(Animal animal) throws SQLException {
-        Statement statement = conn.createStatement();
-        ResultSet rs = statement.executeQuery("SELECT * FROM animals");
-        while(rs.next()){
-            int id = rs.getInt(1);
-            String name = rs.getString(2);
-            String breed = rs.getString(3);
-            String species = rs.getString(4);
-            String description = rs.getString(5);
-            animal = new Animal(name,breed,species,description);
+    public ArrayList<Animal> listAnimalsIndatabase() throws SQLException {
+        ArrayList<Animal> animals = new ArrayList<>();
+        PreparedStatement ps = conn.prepareStatement
+                ("SELECT * FROM animals");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Animal animal;
+            int id = rs.getInt("animalid");
+            String name = rs.getString("animal_name");
+            String breed = rs.getString("animal_breed");
+            String description = rs.getString("animal_description");
+            String species = rs.getString("animal_species");
+            animal = new Animal(id, name, species, breed, description);
+            animals.add(animal);
         }
-        this.animals.add(animal);
         return animals;
-    }
-    @Override
-    public String toString() {
-        return "AnimalRepository{" +
-                "animals=" + animals +
-                '}';
     }
 }
 

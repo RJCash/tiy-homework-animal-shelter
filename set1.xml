@@ -1,0 +1,5 @@
+<dataset>
+    <animals animal_name="Bob" animal_breed="Labrador" animal_species="Dog" animalid ="1" animal_description="hmm"/>
+    <animals animal_name ="Alice" animal_breed="Husky" animal_species="Dog" animalid ="2" animal_description="girl doggy" />
+    <animals animal_name="Charlie" animal_breed="Husky" animal_species="Dog" animalid ="3" animal_description="boy doggy"/>
+</dataset>

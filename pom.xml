@@ -18,11 +18,17 @@
             </plugin>
         </plugins>
     </build>
-
+   <dependencies>
+    <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>9.4-1203-jdbc4</version>
+    </dependency>
     <dependency>
         <groupId>com.github.stefanbirkner</groupId>
         <artifactId>system-rules</artifactId>
         <version>1.16.0</version>
         <scope>test</scope>
     </dependency>
+</dependencies>
 </project>

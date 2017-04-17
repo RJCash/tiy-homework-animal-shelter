@@ -1,3 +1,4 @@
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,23 +9,28 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner scan = new Scanner(System.in);
         MenuService menu = new MenuService(scan);
-        ArrayList<Animal> animal = new ArrayList<>();
+        DriverManager.registerDriver(new org.postgresql.Driver());
+        String jdbcUrl = "jdbc:postgresql://localhost/animalshelter";
+        AnimalRepository repository = new AnimalRepository(jdbcUrl);
+        ArrayList<Animal> animals = repository.listAnimalsIndatabase();
+        //System.out.println(people);
         while(true){
             int selection = menu.getMenuAndSelection();
             if(selection == 1){
-                menu.ListAnimal(animal);
+                menu.ListAnimal(animals);
             }else if(selection == 2){
-                animal.add(menu.CreateAnAnimal());
+                animals.add(menu.CreateAnAnimal());
             }else if(selection == 3){
-                menu.viewAnimalDetails(animal);
+                menu.viewAnimalDetails(animals);
             }else if(selection == 4){
-                menu.editAnimal(animal);
+                menu.editAnimal(animals);
             }else if(selection == 5){
-                menu.deleteAnimal(animal);
+                menu.deleteAnimal(animals);
             }else if(selection == 6){
                 break;
             }
-
         }
+
+
     }
 }

@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
@@ -7,7 +8,10 @@ public class MenuService {
     int selection = 0;
     Scanner scan;
     Animal animal;
-    public MenuService(Scanner scan) {
+    String jdbcUrl = "jdbc:postgresql://localhost/animalshelter";
+    AnimalRepository repository = new AnimalRepository(jdbcUrl);
+
+    public MenuService(Scanner scan) throws SQLException {
         this.scan = scan;
     }
     public int getMenuAndSelection(){
@@ -40,7 +44,7 @@ public class MenuService {
         }
 
     }
-    public Animal CreateAnAnimal() {
+    public Animal CreateAnAnimal() throws SQLException {
         System.out.println(" -- Create an Animal -- ");
         System.out.println();
         Animal animal = new Animal("x","x","x","x");
@@ -90,10 +94,12 @@ public class MenuService {
         } catch (Exception e) {
             System.out.println("Enter a valid species");
         }
+        repository.insertAnimal(animal);
         return animal;
     }
 
     public ArrayList<Animal> viewAnimalDetails(ArrayList<Animal> animal) {
+
         if(animal.size() ==  0){
             System.out.println("The shelter is empty");
         }else {
@@ -125,8 +131,9 @@ public class MenuService {
         }
         return animal;
     }
-    public ArrayList<Animal> editAnimal(ArrayList<Animal> animal) {
+    public ArrayList<Animal> editAnimal(ArrayList<Animal> animal) throws SQLException {
         System.out.println();
+        String animalid;
         if(animal.size() ==  0){
             System.out.println("The shelter is empty");
         }else {
@@ -184,6 +191,17 @@ public class MenuService {
                                     break;
                                 }
                             }
+                            while (true) {
+                                System.out.println("What is the database animalid?: ");
+                                String input = scan.nextLine();
+                                if (input.isEmpty()) {
+                                    System.out.println("You must specify a database id");
+                                } else {
+                                    animalid = input;
+                                    break;
+                                }
+                            }
+                            repository.editanimalinDataBase(repository.readIDbyAnimalName(animal.get(i-1).getName()),animal.get(i-1));
                         } catch (Exception e) {
                             System.out.println("Error");
                         }
@@ -192,14 +210,17 @@ public class MenuService {
                 }
             }
         }
+
         return animal;
     }
-    public ArrayList<Animal> deleteAnimal(ArrayList<Animal> animals) {
+    public ArrayList<Animal> deleteAnimal(ArrayList<Animal> animals) throws SQLException {
+
         int selection = waitForInt("What is the numeric ID of the animal you want to delete?: ");
         try {
             for (int i = 0; i <= animals.size(); i++) {
                 if (selection == i) {
                     System.out.println( animals.get(i-1).getName()+ " has been removed");
+                    repository.deleteAnimal(animals.get(i - 1));
                     animals.remove(i - 1);
                 }
                 if(animals.size() == 0){
